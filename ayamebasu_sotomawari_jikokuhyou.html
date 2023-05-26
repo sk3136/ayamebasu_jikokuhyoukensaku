@@ -6,70 +6,128 @@
 <title>あやめバス外回り時刻表</title>
 <script>
     var soto_bus_stop = ['新発田営業所（新発田高校前）','新発田駅','駅前通','中央商店街','中央町','大栄町','大栄町2丁目','御幸町3丁目','御幸町2丁目','住吉町5丁目','農業高校前','豊浦病院前','西新発田駅前','イオンモール','住吉町4丁目','隣保館前','住吉町','自動車学校前','新栄町1丁目','新栄町2丁目','コモタウン','舟入町2丁目','舟入町','中曽根町','中曽根町1丁目','城北町3丁目','城北町ニュータウン','城北町1丁目','新発田郵便局前','新発田城址公園','西新発田高校前','石川小路','中町','上町','カトリック教会前','生涯学習センター前','緑町','東新町2丁目','東新町1丁目','カルチャーセンター入口','ボランティアセンター前','新発田病院','新発田駅','新発田営業所（新発田高校前）']
-    var jikokuhyou_1 = ['649','655','656','657','658','659','－','－','－','－','700','703','709','711','712','713','714','715','717','718','724','725','726','727','728','729','730','731','733','↓','↓','735','737','738','740','744','745','748','749','－','－','752','754','800']
-    var jikokuhyou_2 = ['－','817','818','819','820','821','－','－','－','－','822','825','831','833','834','835','836','837','839','840','846','847','848','849','850','851','852','853','855','↓','↓','857','859','900','902','906','907','－','－','909','910','911','913','919']
-    var jikokuhyou_3 = ['819','825','826','827','828','829','831','832','833','835','－','－','839','841','842','843','844','845','847','848','854','855','856','857','858','859','900','901','903','↓','↓','905','907','908','910','914','915','－','－','917','918','919','921','－']
+    var jikokuhyou_1 = ['649','655','656','657','658','659','－','－','－','－','700','703','709','711','712','713','714','715','717','718','724','725','726','727','728','729','730','731','733','－','－','735','737','738','740','744','745','748','749','－','－','752','754','800']
+    var jikokuhyou_2 = ['－','817','818','819','820','821','－','－','－','－','822','825','831','833','834','835','836','837','839','840','846','847','848','849','850','851','852','853','855','－','－','857','859','900','902','906','907','－','－','909','910','911','913','919']
+    var jikokuhyou_3 = ['819','825','826','827','828','829','831','832','833','835','－','－','839','841','842','843','844','845','847','848','854','855','856','857','858','859','900','901','903','－','－','905','907','908','910','914','915','－','－','917','918','919','921','－']
     var jikokuhyou_4 = ['－','930','931','932','933','934','936','937','938','940','－','－','944','946','947','948','949','950','952','953','959','1000','1001','1002','1003','1004','1005','1006','1008','1009','1010','1013','1015','1016','1018','1022','1023','－','－','1025','1026','1027','1029','1035']
-    var jikokuhyou_5 = ['－','1017','1018','1019','1020','1021','－','－','－','－','1022','1025','1031','1033','1034','1035','1036','1037','1039','1040','1046','1047','1048','1049','1050','1051','1052','1053','1055','↓','↓','1057','1059','1100','1102','1106','1107','－','－','1109','1110','1111','1113','1119']
+    var jikokuhyou_5 = ['－','1017','1018','1019','1020','1021','－','－','－','－','1022','1025','1031','1033','1034','1035','1036','1037','1039','1040','1046','1047','1048','1049','1050','1051','1052','1053','1055','－','－','1057','1059','1100','1102','1106','1107','－','－','1109','1110','1111','1113','1119']
     var jikokuhyou_6 = ['1129','1135','1136','1137','1138','1139','1141','1142','1143','1145','－','－','1149','1151','1152','1153','1154','1155','1157','1158','1204','1205','1206','1207','1208','1209','1210','1211','1213','1214','1215','1218','1220','1221','1223','1227','1228','－','－','1230','1231','1232','1234','－']
     var jikokuhyou_7 = ['－','1240','1241','1242','1243','1244','1246','1247','1248','1250','－','－','1254','1256','1257','1258','1259','1300','1302','1303','1309','1310','1311','1312','1313','1314','1315','1316','1318','1319','1320','1323','1325','1326','1328','1332','1333','－','－','1335','1336','1337','1339','1345']
-    var jikokuhyou_8 = ['－','1307','1308','1309','1310','1311','－','－','－','－','1312','1315','1321','1323','1324','1325','1326','1327','1329','1330','1336','1337','1338','1339','1340','1341','1342','1343','1345','↓','↓','1347','1349','1350','1352','1356','1357','－','－','1359','1400','1401','1403','1409']
+    var jikokuhyou_8 = ['－','1307','1308','1309','1310','1311','－','－','－','－','1312','1315','1321','1323','1324','1325','1326','1327','1329','1330','1336','1337','1338','1339','1340','1341','1342','1343','1345','－','－','1347','1349','1350','1352','1356','1357','－','－','1359','1400','1401','1403','1409']
     var jikokuhyou_9_ = ['1429','1435','1436','1437','1438','1439','1441','1442','1443','1445','－','－','1449','1451','1452','1453','1454','1455','1457','1458','1504','1505','1506','1507','1508','1509','1510','1511','1513','1514','1515','1518','1520','1521','1523','1527','1528','－','－','1530','1531','1532','1534','1540']
     var jikokuhyou_10 = ['1609','1615','1616','1617','1618','1619','－','－','－','－','1620','1623','1629','1631','1632','1633','1634','1635','1637','1638','1644','1645','1646','1647','1648','1649','1650','1651','1653','1654','1655','1658','1700','1701','1703','1707','1708','－','－','1710','1711','1712','1714','－']
-    var jikokuhyou_11 = ['－','1720','1721','1722','1723','1724','－','－','－','－','1725','1728','1737','1739','1740','1741','1742','1743','1745','1746','1752','1753','1754','1755','1756','1757','1758','1759','1801','↓','↓','1803','1805','1806','1808','1810','1811','－','－','1813','1814','1815','1817','1823']
-    var jikokuhyou_12 = ['1848','1855','1856','1857','1858','1859','－','－','－','－','1900','1903','1909','1911','1912','1913','1914','1915','1917','1918','1924','1925','1926','1927','1928','1929','1930','1931','1933','1934','1935','1938','1940','1941','↓','↓','↓','↓','↓','↓','↓','↓','1944','－']
-    var jikokuhyou_13 = ['－','1953','1954','1955','1956','1957','－','－','－','－','1958','2001','2009','2011','2012','2013','2014','2015','2017','2018','2024','2025','2026','2027','2028','2029','2030','2031','2033','↓','↓','2035','2037','2038','↓','↓','↓','↓','↓','↓','↓','↓','2041','2047']
+    var jikokuhyou_11 = ['－','1720','1721','1722','1723','1724','－','－','－','－','1725','1728','1737','1739','1740','1741','1742','1743','1745','1746','1752','1753','1754','1755','1756','1757','1758','1759','1801','－','－','1803','1805','1806','1808','1810','1811','－','－','1813','1814','1815','1817','1823']
+    var jikokuhyou_12 = ['1848','1855','1856','1857','1858','1859','－','－','－','－','1900','1903','1909','1911','1912','1913','1914','1915','1917','1918','1924','1925','1926','1927','1928','1929','1930','1931','1933','1934','1935','1938','1940','1941','－','－','－','－','－','－','－','－','1944','－']
+    var jikokuhyou_13 = ['－','1953','1954','1955','1956','1957','－','－','－','－','1958','2001','2009','2011','2012','2013','2014','2015','2017','2018','2024','2025','2026','2027','2028','2029','2030','2031','2033','－','－','2035','2037','2038','－','－','－','－','－','－','－','－','2041','2047']
     var now = new Date();
     var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    function search() {
+        var departure = document.getElementById('departure_stop').value;
+        var destination = document.getElementById('destination_stop').value;
+        if (departure > destination) {
+            alert('この方向では検索できません');
+        }
+        // =は等しいではなく入れるなので等しいの場合は==を使う
+        if (departure == destination) {
+            alert('同じバス停が選択されています');
+        }
+        var year_selected = document.getElementById('year').value;
+        var month_selected = document.getElementById('month').value;
+        var date_selected = document.getElementById('date').value;
+        var hour_selected = document.getElementById('hour').value;
+        var minute_selected = document.getElementById('minute').value;
+        // 発着という名前の要素を取得
+        let elements = document.getElementsByName('発着');
+        // ラジオボタンの数を取得
+        let len = elements.length;
+        // チェックされたラジオボタンの値を入れる変数を準備
+        let checkValue = '';
+        // ラジオボタンの数だけ繰り返す
+        for (let i = 0; i < len; i++){
+            // もしラジオボタンがチェックされていたら
+            if (elements.item(i).checked){
+                // チェックされた値を変数checkValueに入れる
+                checkValue = elements.item(i).value;
+            }
+        }
+    }
+    // addoptionはセレクトボックスにoptionを加える（add）という意味
     window.onload = function addOption() {
         for (var i = 0; i < soto_bus_stop.length; i++) {
-            var select = document.getElementById("soto_bus_stop");
+            // selectタグを取得する
+            var select = document.getElementById("departure_stop");
+            // optionを作る
             var option = document.createElement("option");
             option.text = soto_bus_stop[i];
             option.value = i;
+            // selectタグの子要素にoptionタグを追加する
             select.appendChild(option);
         }
         for (var i = 0; i < soto_bus_stop.length; i++) {
-            var select = document.getElementById("soto_bus_stop_2");
+            var select = document.getElementById("destination_stop");
             var option = document.createElement("option");
+            // optionのtext要素にリストのi番目を入れる
             option.text = soto_bus_stop[i];
+            // optionのvalue要素にi番目を入れる
             option.value = i;
             select.appendChild(option);
         }
         for (var i = year; i < year + 2; i++) {
-            var select = document.getElementById("soto_bus_year");
+            var select = document.getElementById("year");
             var option = document.createElement("option");
             option.text = i;
             option.value = i;
             select.appendChild(option);
+            // 値が今年と同じだったら
+            if (option.value == year) {
+                // 最初から選んである状態にする
+                option.setAttribute("selected", true)
+            }
         }
         for (var i = 1; i < 13; i++) {
-            var select = document.getElementById("soto_bus_month");
+            var select = document.getElementById("month");
             var option = document.createElement("option");
             option.text = i;
             option.value = i;
             select.appendChild(option);
+            if (option.value == month) {
+                option.setAttribute("selected", true)
+            }
         }
         for (var i = 1; i < 32; i++) {
-            var select = document.getElementById("soto_bus_day");
+            var select = document.getElementById("date");
             var option = document.createElement("option");
             option.text = i;
             option.value = i;
             select.appendChild(option);
+            if (option.value == date) {
+                option.setAttribute("selected", true)
+            }
         }
+        // var i = 0;は変数iを作って最初を0にする　i < 21;はiが21より小さい間繰り返す　i++はiを1ずつ増やす
         for (var i = 0; i < 24; i++) {
-            var select = document.getElementById("soto_bus_time");
+            var select = document.getElementById("hour");
             var option = document.createElement("option");
             option.text = i;
             option.value = i;
             select.appendChild(option);
+            if (option.value == hour) {
+                option.setAttribute("selected", true)
+            }
         }
         for (var i = 0; i < 60; i++) {
-            var select = document.getElementById("soto_bus_time_2");
+            var select = document.getElementById("minute");
             var option = document.createElement("option");
             option.text = i;
             option.value = i;
             select.appendChild(option);
+            if (option.value == minute) {
+                option.setAttribute("selected", true)
+            }
         }
     }
 </script>
@@ -93,30 +151,42 @@ select {
 }
 input {
     margin: 10px;
+    transform: scale(1.75);
+}
+label {
+    font-size: 20px;
+    /* もともと表示されていたところからずらす（topなどでずらすpx数を決める)*/
+    position: relative;
+    /* 上から1pxずらす*/
+    top: 1px;
 }
 </style>
 </head>
 <body style="text-align: center">
 <h1>あやめバス外回り<br>時刻表</h1>
 <p>出発するバス停を選んでください</p>
-<select name="sotomawari" id="soto_bus_stop">
+<select id="departure_stop">
 </select>
 <p>目的地のバス停を選んでください</p>
-<select name="sotomawari_2" id="soto_bus_stop_2">
+<select id="destination_stop">
 </select>
 <p>利用時間を選んでください</p>
 <p>
-<select name="sotomawari_year" id="soto_bus_year"></select>年
-<select name="sotomawari_month" id="soto_bus_month"></select>月
-<select name="sotomawari_day" id="soto_bus_day"></select>日
+<select id="year"></select>年
+<select id="month"></select>月
+<select id="date"></select>日
 </p>
 <p>
-    <select name="sotomawari_time" id="soto_bus_time"></select>時
-    <select name="sotomawari_time_2" id="soto_bus_time_2"></select>分
+    <select id="hour"></select>時
+    <select id="minute"></select>分
 </p>
-<input type="radio" name="出発" value="出発" style="transform: scale(1.75);" checked> 出発<br>
-<input type="radio" name="出発" value="到着" style="transform: scale(1.75);"> 到着
-<button>検索</button>
+<!--radioボタンを作る　radioボタンのボタン部分の大きさを1.75にする　radioボタンの初期値を設定する　　nameはセットの名前なので一つのときはいらない-->
+<input type="radio" name="発着" value="出発" id="departure" checked>
+<label for="departure">出発</label><br>
+<input type="radio" name="発着" value="到着" id="destination">
+<label for="destination">到着</label>
+<!--関数の名前のあとは()を付ける-->
+<button onclick="search()">検索</button>
 <button onclick="location.href='index.html'">戻る</button>
 </body>
 </html>

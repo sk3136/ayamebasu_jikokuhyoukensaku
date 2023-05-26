@@ -20,61 +20,97 @@
     var jikokuhyou_12 = ['－','1849','1850','1852','1853','1855','1858','1859','1901','1902','1903','－','－','1905','1906','1907','1908','1909','1910','1911','1913','1918','1919','1920','1922','1924','1925','1926','1927','1932','1934','1936','1938','1939','－','－','1941','1942','1943','1944','1945','1951']
     var now = new Date();
     var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    function search() {
+        var departure = document.getElementById('departure_stop').value
+        var destination = document.getElementById('destination_stop').value
+        if (departure > destination) {
+            alert('この方向では検索できません')
+        }
+        if (departure == destination) {
+            alert('同じバス停が選択されています')
+        }
+        var year_selected = document.getElementById('year').value;
+        var month_selected = document.getElementById('month').value;
+        var date_selected = document.getElementById('date').value;
+        var hour_selected = document.getElementById('hour').value;
+        var minute_selected = document.getElementById('minute').value;
+        let elements = document.getElementsByName('発着');
+        let len = elements.length;
+        let checkValue = '';
+        for (let i = 0; i < len; i++){
+            if (elements.item(i).checked){
+                checkValue = elements.item(i).value;
+            }
+        }
+    }
     window.onload = function addOption() {
         for (var i = 0; i < uti_bus_stop.length; i++) {
-            // selectタグを取得する
-            var select = document.getElementById("uti_bus_stop");
-            // optionを作る
+            var select = document.getElementById("departure_stop");
             var option = document.createElement("option");
             option.text = uti_bus_stop[i];
             option.value = i;
-            // selectタグの子要素にoptionタグを追加する
             select.appendChild(option);
         }
         for (var i = 0; i < uti_bus_stop.length; i++) {
-            var select = document.getElementById("uti_bus_stop_2");
+            var select = document.getElementById("destination_stop");
             var option = document.createElement("option");
-            // optionのtext要素にリストのi番目を入れる
             option.text = uti_bus_stop[i];
-            // optionのvalue要素にi番目を入れる
             option.value = i;
             select.appendChild(option);
         }
         for (var i = year; i < year + 2; i++) {
-            var select = document.getElementById("soto_bus_year");
+            var select = document.getElementById("year");
             var option = document.createElement("option");
             option.text = i;
             option.value = i;
             select.appendChild(option);
+            if (option.value == year) {
+                option.setAttribute("selected", true)
+            }
         }
         for (var i = 1; i < 13; i++) {
-            var select = document.getElementById("soto_bus_month");
+            var select = document.getElementById("month");
             var option = document.createElement("option");
             option.text = i;
             option.value = i;
             select.appendChild(option);
+            if (option.value == month) {
+                option.setAttribute("selected", true)
+            }
         }
         for (var i = 1; i < 32; i++) {
-            var select = document.getElementById("soto_bus_day");
+            var select = document.getElementById("date");
             var option = document.createElement("option");
             option.text = i;
             option.value = i;
             select.appendChild(option);
+            if (option.value == date) {
+                option.setAttribute("selected", true)
+            }
         }
-        // var i = 0;は変数iを作って最初を0にする　i < 24;はiが24より小さい間繰り返す　i++はiを1ずつ増やす
         for (var i = 0; i < 24; i++) {
-            var select = document.getElementById("uti_bus_time");
+            var select = document.getElementById("hour");
             var option = document.createElement("option");
             option.text = i;
             option.value = i;
             select.appendChild(option);
+            if (option.value == hour) {
+                option.setAttribute("selected", true)
+            }
         }
         for (var i = 0; i < 60; i++) {
-            var select = document.getElementById("uti_bus_time_2");
+            var select = document.getElementById("minute");
             var option = document.createElement("option");
             option.text = i;
             option.value = i;
             select.appendChild(option);
+            if (option.value == minute) {
+                option.setAttribute("selected", true)
+            }
         }
     }
 </script>
@@ -98,31 +134,38 @@ select {
 }
 input {
     margin: 10px;
+    transform: scale(1.75);
+}
+label {
+    font-size: 20px;
+    position: relative;
+    top: 1px;
 }
 </style>
 </head>
 <body style="text-align: center">
 <h1>あやめバス内回り<br>時刻表</h1>
 <p>出発するバス停を選んでください</p>
-<select name="utimawari" id="uti_bus_stop">
+<select id="departure_stop">
 </select>
 <p>目的地のバス停を選んでください</p>
-<select name="utimawari_2" id="uti_bus_stop_2">
+<select id="destination_stop">
 </select>
 <p>利用時間を選んでください</p>
 <p>
-    <select name="sotomawari_year" id="soto_bus_year"></select>年
-    <select name="sotomawari_month" id="soto_bus_month"></select>月
-    <select name="sotomawari_day" id="soto_bus_day"></select>日
+    <select id="year"></select>年
+    <select id="month"></select>月
+    <select id="date"></select>日
 </p>
 <p>
-    <select name="utimawari_time" id="uti_bus_time"></select>時
-    <select name="utimawari_time_2" id="uti_bus_time_2"></select>分
+    <select id="hour"></select>時
+    <select id="minute"></select>分
 </p>
-<!--radioボタンを作る　radioボタンのボタン部分の大きさを1.75にする　radioボタンの初期値を設定する-->
-<input type="radio" name="出発" value="出発" style="transform: scale(1.75);" checked> 出発<br>
-<input type="radio" name="出発" value="到着" style="transform: scale(1.75);"> 到着
-<button>検索</button>
+<input type="radio" name="発着" value="出発" id="departure" checked>
+<label for="departure">出発</label><br>
+<input type="radio" name="発着" value="到着" id="destination">
+<label for="destination">到着</label>
+<button onclick="search()">検索</button>
 <button onclick="location.href='index.html'">戻る</button>
 </body>
 </html>
