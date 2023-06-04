@@ -46,6 +46,19 @@
                 checkValue = elements.item(i).value;
             }
         }
+        if (departure < destination) {
+            if (jikokuhyou_4[departure].length == 3) {
+                alert(jikokuhyou_4[departure].slice(0,1) + '時' + jikokuhyou_4[departure].slice(1,3) + '分')
+                alert(jikokuhyou_4[destination].slice(0,1) + '時' + jikokuhyou_4[destination].slice(1,3) + '分')
+            }
+            else if (jikokuhyou_4[departure].length == 4) {
+                alert(jikokuhyou_4[departure].slice(0,2) + '時' + jikokuhyou_4[departure].slice(2,4) + '分')
+                alert(jikokuhyou_4[destination].slice(0,2) + '時' + jikokuhyou_4[destination].slice(2,4) + '分')
+            }
+        }
+        else if (jikokuhyou_4[departure].slice(0,1) || jikokuhyou_4[destination].slice(0,1) || jikokuhyou_4[departure].slice(0,2) || jikokuhyou_4[destination].slice(0,2) == '－') {
+            alert('この時間にこの駅は通りません')
+        }
     }
     window.onload = function addOption() {
         for (var i = 0; i < uti_bus_stop.length; i++) {
