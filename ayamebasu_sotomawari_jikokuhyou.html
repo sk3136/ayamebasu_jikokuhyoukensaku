@@ -55,10 +55,24 @@
             }
         }
         if (departure < destination) {
-            var hourminute = hour_selected + minute_selected
-            // 文字列は数値にしてから比べないと正しく判断されない
-            if (Number(hourminute) < Number(jikokuhyou_1[departure])) {
-                alert(jikokuhyou_1[departure])
+            var hourminute = hour_selected + minute_selected;
+            if (checkValue == '出発') {
+                // !=はでなければ
+                if (jikokuhyou_1[departure] != '－' || jikokuhyou_1[destination] != '－') {
+                    alert('a')
+                }
+                // 文字列は数値化してから比べないと正しく判断されない
+                if (Number(hourminute) < Number(jikokuhyou_1[departure])) {
+                    alert(jikokuhyou_1[departure])
+                }
+            }
+            if (checkValue == '到着') {
+                if (jikokuhyou_1[departure] != '－' || jikokuhyou_1[destination] != '－') {
+                    alert('a')
+                }
+                if (Number(hourminute) < Number(jikokuhyou_1[destination])) {
+                    alert(jikokuhyou_1[destination])
+                }
             }
         }
     }
