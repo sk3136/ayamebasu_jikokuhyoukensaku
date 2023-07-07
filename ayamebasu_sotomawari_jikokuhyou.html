@@ -43,13 +43,26 @@
         ['－','1953','1954','1955','1956','1957','－','－','－','－','1958','2001','2009','2011','2012','2013','2014','2015','2017','2018','2024','2025','2026','2027','2028','2029','2030','2031','2033','－','－','2035','2037','2038','－','－','－','－','－','－','－','－','2041','2047']
     ];
     var syukujitu = ['2023/1/1','2023/1/2','2023/1/9','2023/2/11','2023/2/23','2023/3/21','2023/4/29','2023/5/3','2023/5/4','2023/5/5','2023/7/17','2023/8/11','2023/9/18','2023/9/23','2023/10/9','2023/11/3','2023/11/23','2023/12/31','2024/1/1','2024/1/2','2024/1/8','2024/2/11','2024/2/12','2024/2/23','2024/3/20','2024/4/29','2024/5/3','2024/5/4','2024/5/5','2024/5/6','2024/7/15','2024/8/11','2024/8/12','2024/9/16','2024/9/22','2024/9/23','2024/10/14','2024/11/3','2024/11/4','2024/11/23','2024/12/31'];
-    var community = ['1/3','8/13','8/14','8/15','8/16','12/29','12/30'];
+    var community = ['1/1','1/2','1/3','8/13','8/14','8/15','8/16','12/29','12/30','12/31'];
     var now = new Date();
     var year = now.getFullYear();
     var month = now.getMonth() + 1;
     var date = now.getDate();
     var hour = now.getHours();
     var minute = now.getMinutes();
+    function answer(departure, destination) {
+        // ひき数departureの長さ（値）が3桁なら
+        if (departure.length == 3) {
+            alert('出発' + departure.slice(0,1) + '時' + Number(departure.slice(1,3)) + '分');
+        } else if (departure.length == 4) {
+            alert('出発' + departure.slice(0,2) + '時' + Number(departure.slice(2,4)) + '分');
+        }
+        if (destination.length == 3) {
+            alert('到着' + destination.slice(0,1) + '時' + Number(destination.slice(1,3)) + '分');
+        } else if (destination.length == 4) {
+            alert('到着' + destination.slice(0,2) + '時' + Number(destination.slice(2,4)) + '分');
+        }
+    }
     function search() {
         var departure = Number(document.getElementById('departure_stop').value);
         var destination = Number(document.getElementById('destination_stop').value);
@@ -65,15 +78,23 @@
         var date_selected = document.getElementById('date').value;
         var hour_selected = document.getElementById('hour').value;
         var minute_selected = document.getElementById('minute').value;
+        var nou_selected = new Date(year_selected,month_selected - 1,date_selected);
+        var dayOfWeek = nou_selected.getDay();
+        var hourminute = hour_selected + minute_selected;
+        var holiday = false;
+        var com_holiday = false;
+        if (dayOfWeek == 0 || dayOfWeek == 6) {
+            holiday = true;
+        }
         for (var i = 0; i < syukujitu.length; i++) {
             if (syukujitu[i] == year_selected + '/' + month_selected + '/' + date_selected) {
-                var departure = destination;
-                alert('この日はバスが運行しません');
+                holiday = true;
                 break;
             }
         }
         for (var i = 0; i < community.length; i++) {
             if (community[i] == month_selected + '/' + date_selected) {
+                com_holiday = true;
                 break;
             }
         }
@@ -92,93 +113,68 @@
             }
         }
         if (departure < destination) {
-            var nou_selected = new Date(year_selected,month_selected - 1,date_selected);
-            var dayOfWeek = nou_selected.getDay();
-            var hourminute = hour_selected + minute_selected;
             if (minute_selected.length == 1) {
-                var hourminute = hour_selected + 0 + minute_selected;
+                hourminute = hour_selected + 0 + minute_selected;
             }
             if (checkValue == '出発') {
-                if (dayOfWeek != 0 && dayOfWeek != 6) {
+                if (holiday == false && com_holiday == false) {
                     for (var i = 0; i < jikoku.length; i++) {
                         // !=はでなければ
                         if (jikoku[i][departure] != '－' && jikoku[i][destination] != '－') {
                             // 文字列は数値化してから比べないと正しく判断されない
                             if (Number(hourminute) < Number(jikoku[i][departure])) {
-                                // jikokuのdeparture番目の長さ（値）が3桁なら
-                                if (jikoku[i][departure].length == 3) {
-                                    alert('出発' + jikoku[i][departure].slice(0,1) + '時' + Number(jikoku[i][departure].slice(1,3)) + '分');
-                                } else if (jikoku[i][departure].length == 4) {
-                                    alert('出発' + jikoku[i][departure].slice(0,2) + '時' + Number(jikoku[i][departure].slice(2,4)) + '分');
-                                }
-                                if (jikoku[i][destination].length == 3) {
-                                    alert('到着' + jikoku[i][destination].slice(0,1) + '時' + Number(jikoku[i][destination].slice(1,3)) + '分');
-                                    break;
-                                } else if (jikoku[i][destination].length == 4) {
-                                    alert('到着' + jikoku[i][destination].slice(0,2) + '時' + Number(jikoku[i][destination].slice(2,4)) + '分');
-                                    break;
-                                }
+                                // 関数answerのひき数departureにjikoku[i][departure]を、ひき数destinationにjikoku[i][destination]をあてはめた命令を実行する
+                                answer(jikoku[i][departure], jikoku[i][destination]);
+                                break;
                             }
                         }
                     }
-                } else if (dayOfWeek == 0 || dayOfWeek == 6) {
+                } else if (holiday == true) {
                     for (var i = 0; i < jikoku_holiday.length; i++) {
                         if (jikoku_holiday[i][departure] != '－' && jikoku_holiday[i][destination] != '－') {
                             if (Number(hourminute) < Number(jikoku_holiday[i][departure])) {
-                                if (jikoku_holiday[i][departure].length == 3) {
-                                    alert('出発' + jikoku_holiday[i][departure].slice(0,1) + '時' + Number(jikoku_holiday[i][departure].slice(1,3)) + '分');
-                                } else if (jikoku_holiday[i][departure].length == 4) {
-                                    alert('出発' + jikoku_holiday[i][departure].slice(0,2) + '時' + Number(jikoku_holiday[i][departure].slice(2,4)) + '分');
-                                }
-                                if (jikoku_holiday[i][destination].length == 3) {
-                                    alert('到着' + jikoku_holiday[i][destination].slice(0,1) + '時' + Number(jikoku_holiday[i][destination].slice(1,3)) + '分');
-                                    break;
-                                } else if (jikoku_holiday[i][destination].length == 4) {
-                                    alert('到着' + jikoku_holiday[i][destination].slice(0,2) + '時' + Number(jikoku_holiday[i][destination].slice(2,4)) + '分');
-                                    break;
-                                }
+                                answer(jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
+                                break;
+                            }
+                        }
+                    }
+                } else if (holiday == false && com_holiday == true) {
+                    for (var i = 0; i < jikoku_community.length; i++) {
+                        if (jikoku_community[i][departure] != '－' && jikoku_community[i][destination] != '－') {
+                            if (Number(hourminute) < Number(jikoku_community[i][departure])) {
+                                answer(jikoku_community[i][departure], jikoku_community[i][destination]);
+                                break;
                             }
                         }
                     }
                 }
             }
             if (checkValue == '到着') {
-                if (dayOfWeek != 0 && dayOfWeek != 6) {
+                if (holiday == false && com_holiday == false) {
                     // 逆方向に繰り返す（jikokuの最後からループを始める）（リストの一つ目の値は0なので0以上の間繰り返す）（値を1ずつ減らす）
                     for (var i = jikoku.length - 1; i >= 0; i--) {
                         if (jikoku[i][departure] != '－' && jikoku[i][destination] != '－') {
                             if (Number(hourminute) > Number(jikoku[i][destination])) {
-                                if (jikoku[i][departure].length == 3) {
-                                    alert('出発' + jikoku[i][departure].slice(0,1) + '時' + Number(jikoku[i][departure].slice(1,3)) + '分');
-                                } else if (jikoku[i][departure].length == 4) {
-                                    alert('出発' + jikoku[i][departure].slice(0,2) + '時' + Number(jikoku[i][departure].slice(2,4)) + '分');
-                                }
-                                if (jikoku[i][destination].length == 3) {
-                                    alert('到着' + jikoku[i][destination].slice(0,1) + '時' + Number(jikoku[i][destination].slice(1,3)) + '分');
-                                    break;
-                                } else if (jikoku[i][destination].length == 4) {
-                                    alert('到着' + jikoku[i][destination].slice(0,2) + '時' + Number(jikoku[i][destination].slice(2,4)) + '分');
-                                    break;
-                                }
+                                answer(jikoku[i][departure], jikoku[i][destination]);
+                                break;
                             }
                         }
                     }
-                } else if (dayOfWeek == 0 || dayOfWeek == 6) {
+                } else if (holiday == true) {
                     for (var i = jikoku_holiday.length - 1; i >= 0; i--) {
                         if (jikoku_holiday[i][departure] != '－' && jikoku_holiday[i][destination] != '－') {
                             if (Number(hourminute) > Number(jikoku_holiday[i][destination])) {
-                                if (jikoku_holiday[i][departure].length == 3) {
-                                    alert('出発' + jikoku_holiday[i][departure].slice(0,1) + '時' + Number(jikoku_holiday[i][departure].slice(1,3)) + '分');
-                                } else if (jikoku_holiday[i][departure].length == 4) {
-                                    alert('出発' + jikoku_holiday[i][departure].slice(0,2) + '時' + Number(jikoku_holiday[i][departure].slice(2,4)) + '分');
-                                }
-                                if (jikoku_holiday[i][destination].length == 3) {
-                                    alert('到着' + jikoku_holiday[i][destination].slice(0,1) + '時' + Number(jikoku_holiday[i][destination].slice(1,3)) + '分');
-                                    break;
-                                } else if (jikoku_holiday[i][destination].length == 4) {
-                                    alert('到着' + jikoku_holiday[i][destination].slice(0,2) + '時' + Number(jikoku_holiday[i][destination].slice(2,4)) + '分');
-                                    break;
-                                }
+                                answer(jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
+                                break;
+                            }
+                        }
+                    }
+                } else if (holiday == false && com_holiday == true) {
+                    for (var i = jikoku_community.length - 1; i >= 0; i--) {
+                        if (jikoku_community[i][departure] != '－' && jikoku_community[i][destination] != '－') {
+                            if (Number(hourminute) > Number(jikoku_community[i][destination])) {
+                                answer(jikoku_community[i][departure],jikoku_community[i][destination]);
+                                break;    
                             }
                         }
                     }
