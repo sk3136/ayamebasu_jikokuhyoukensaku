@@ -116,9 +116,9 @@
             }
             if (checkValue == '出発') {
                 if (month_selected == 1 && date_selected == 1) {
-                    for (var i = jikoku_community_holiday.length - 1; i >= 0; i--) {
+                    for (var i = 0; i < jikoku_community_holiday.length; i++) {
                         if (jikoku_community_holiday[i][departure] != '－' || jikoku_community_holiday[i][destination] != '－') {
-                            if (Number(hourminute) > Number(jikoku_community_holiday[i][destination])) {
+                            if (Number(hourminute) < Number(jikoku_community_holiday[i][departure])) {
                                 answer(jikoku_community_holiday[i][departure], jikoku_community_holiday[i][destination]);
                                 break;
                             }
