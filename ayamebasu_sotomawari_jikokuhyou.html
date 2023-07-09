@@ -126,6 +126,9 @@
                                 // 関数answerのひき数departureにjikoku[i][departure]を、ひき数destinationにjikoku[i][destination]をあてはめた命令を実行する
                                 answer(jikoku[i][departure], jikoku[i][destination]);
                                 break;
+                            } else {
+                                alert('この時間にはもうバスは走っていません');
+                                break;
                             }
                         }
                     }
@@ -135,6 +138,9 @@
                             if (Number(hourminute) < Number(jikoku_holiday[i][departure])) {
                                 answer(jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
                                 break;
+                            } else {
+                                alert('この時間にはもうバスは走っていません');
+                                break;
                             }
                         }
                     }
@@ -143,6 +149,9 @@
                         if (jikoku_community[i][departure] != '－' && jikoku_community[i][destination] != '－') {
                             if (Number(hourminute) < Number(jikoku_community[i][departure])) {
                                 answer(jikoku_community[i][departure], jikoku_community[i][destination]);
+                                break;
+                            } else {
+                                alert('この時間にはもうバスは走っていません');
                                 break;
                             }
                         }
@@ -157,6 +166,9 @@
                             if (Number(hourminute) > Number(jikoku[i][destination])) {
                                 answer(jikoku[i][departure], jikoku[i][destination]);
                                 break;
+                            } else {
+                                alert('この時間にはまだバスは走っていません');
+                                break;
                             }
                         }
                     }
@@ -165,6 +177,9 @@
                         if (jikoku_holiday[i][departure] != '－' && jikoku_holiday[i][destination] != '－') {
                             if (Number(hourminute) > Number(jikoku_holiday[i][destination])) {
                                 answer(jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
+                                break;
+                            } else {
+                                alert('この時間にはまだバスは走っていません');
                                 break;
                             }
                         }
@@ -175,6 +190,9 @@
                             if (Number(hourminute) > Number(jikoku_community[i][destination])) {
                                 answer(jikoku_community[i][departure],jikoku_community[i][destination]);
                                 break;    
+                            } else {
+                                alert('この時間にはまだバスは走っていません');
+                                break;
                             }
                         }
                     }
