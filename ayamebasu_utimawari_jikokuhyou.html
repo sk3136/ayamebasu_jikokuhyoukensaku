@@ -46,7 +46,7 @@
         ['－','1145','1146','1148','1149','1151','1154','1155','1157','1158','1159','1202','1203','1204','1205','1206','1207','1208','1209','1210','1212','1217','1218','1219','1221','1223','1224','1225','1227','1233','－','－','－','－','1236','1239','1241','1242','1243','1244','1245','1251'],
         ['1339','1345','1346','1348','1349','1351','1354','1355','1357','1358','1359','1402','1403','1404','1405','1406','1407','1408','1409','1410','1412','1417','1418','1419','1421','1423','1424','1425','1427','1433','1435','1437','1439','1440','－','－','1442','1443','1444','1445','1446','－'],
         ['－','1451','1452','1454','1455','1457','1500','1501','1503','1504','1505','1508','1509','1510','1511','1512','1513','1514','1515','1516','1518','1523','1524','1525','1527','1529','1530','1531','1533','1539','1541','1543','1545','1546','－','－','1548','1549','1550','1551','1552','1558'],
-        ['1738','1745','1746','1748','1749','1751','1754','1755','1757','1758','1759','－','－','1801','1802','1803','1804','1805','1806','1807','1809','1814','1815','1816','1818','1820','1821','1822','1823','1828','1830','1832','1834','1835','－','－','1837','1838','1839','1840','1841','－']
+        ['1738','1745','1746','1748','1749','1751','1754','1755','1757','1758','1759','－','－','1801','1802','1803','1804','1805','1806','1807','1809','1814','1815','1816','1818','1820','1821','1822','1823','1828','1830','1832','1834','1835','－','－','1837','1838','1839','1840','1841','1847']
     ];
     var syukujitu = ['2023/1/1','2023/1/2','2023/1/9','2023/2/11','2023/2/23','2023/3/21','2023/4/29','2023/5/3','2023/5/4','2023/5/5','2023/7/17','2023/8/11','2023/9/18','2023/9/23','2023/10/9','2023/11/3','2023/11/23','2023/12/31','2024/1/1','2024/1/2','2024/1/8','2024/2/11','2024/2/12','2024/2/23','2024/3/20','2024/4/29','2024/5/3','2024/5/4','2024/5/5','2024/5/6','2024/7/15','2024/8/11','2024/8/12','2024/9/16','2024/9/22','2024/9/23','2024/10/14','2024/11/3','2024/11/4','2024/11/23','2024/12/31'];
     var community = ['1/1','1/2','1/3','8/13','8/14','8/15','8/16','12/29','12/30','12/31'];
@@ -58,14 +58,14 @@
     var minute = now.getMinutes();
     function answer(departure, destination) {
         if (departure.length == 3) {
-            alert('出発' + departure.slice(0,1) + '時' + Number(departure.slice(1,3)) + '分');
+            document.getElementById('departure_answer').textContent = '出発' + departure.slice(0,1) + '時' + Number(departure.slice(1,3)) + '分';
         } else if (departure.length == 4) {
-            alert('出発' + departure.slice(0,2) + '時' + Number(departure.slice(2,4)) + '分');
+            document.getElementById('departure_answer').textContent = '出発' + departure.slice(0,2) + '時' + Number(departure.slice(2,4)) + '分';
         }
         if (destination.length == 3) {
-            alert('到着' + destination.slice(0,1) + '時' + Number(destination.slice(1,3)) + '分');
+            document.getElementById('destination_answer').textContent = '到着' + destination.slice(0,1) + '時' + Number(destination.slice(1,3)) + '分';
         } else if (destination.length == 4) {
-            alert('到着' + destination.slice(0,2) + '時' + Number(destination.slice(2,4)) + '分');
+            document.getElementById('destination_answer').textContent = '到着' + destination.slice(0,2) + '時' + Number(destination.slice(2,4)) + '分';
         }
     }
     function search() {
@@ -121,10 +121,13 @@
                             if (Number(hourminute) < Number(jikoku_community_holiday[i][departure])) {
                                 answer(jikoku_community_holiday[i][departure], jikoku_community_holiday[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == jikoku_community_holiday.length - 1) {
                                 alert('この時間にはもうバスは走っていません');
                                 break;
                             }
+                        } else if (i == jikoku_community_holiday.length - 1) {
+                            alert('この時間にはもうバスは走っていません');
+                            break;
                         }
                     }
                 } else if (holiday == false && com_holiday == false) {
@@ -133,10 +136,13 @@
                             if (Number(hourminute) < Number(jikoku[i][departure])) {
                                 answer(jikoku[i][departure], jikoku[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == jikoku.length - 1) {
                                 alert('この時間にはもうバスは走っていません');
                                 break;
                             }
+                        } else if (i == jikoku.length - 1) {
+                            alert('この時間にはもうバスは走っていません');
+                            break;
                         }
                     }
                 } else if (holiday == true) {
@@ -145,10 +151,13 @@
                             if (Number(hourminute) < Number(jikoku_holiday[i][departure])) {
                                 answer(jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == jikoku_holiday.length - 1) {
                                 alert('この時間にはもうバスは走っていません');
                                 break;
                             }
+                        } else if (i == jikoku_holiday.length - 1) {
+                            alert('この時間にはもうバスは走っていません');
+                            break;
                         }
                     }
                 } else if (holiday == false && com_holiday == true) {
@@ -157,10 +166,13 @@
                             if (Number(hourminute) < Number(jikoku_community[i][departure])) {
                                 answer(jikoku_community[i][departure], jikoku_community[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == jikoku_community.length - 1) {
                                 alert('この時間にはもうバスは走っていません');
                                 break;
                             }
+                        } else if (i == jikoku_community.length - 1) {
+                            alert('この時間にはもうバスは走っていません');
+                            break;
                         }
                     }
                 }
@@ -172,10 +184,13 @@
                             if (Number(hourminute) > Number(jikoku_community_holiday[i][destination])) {
                                 answer(jikoku_community_holiday[i][departure], jikoku_community_holiday[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == 0) {
                                 alert('この時間にはまだバスは走っていません');
                                 break;
                             }
+                        } else if (i == 0) {
+                            alert('この時間にはまだバスは走っていません');
+                            break;
                         }
                     }
                 } else if (holiday == false && com_holiday == false) {
@@ -184,10 +199,13 @@
                             if (Number(hourminute) > Number(jikoku[i][destination])) {
                                 answer(jikoku[i][departure], jikoku[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == 0) {
                                 alert('この時間にはまだバスは走っていません');
                                 break;
                             }
+                        } else if (i == 0) {
+                            alert('この時間にはまだバスは走っていません');
+                            break;
                         }
                     }
                 } else if (holiday == true) {
@@ -196,10 +214,13 @@
                             if (Number(hourminute) > Number(jikoku_holiday[i][destination])) {
                                 answer(jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == 0) {
                                 alert('この時間にはまだバスは走っていません');
                                 break;
                             }
+                        } else if (i == 0) {
+                            alert('この時間にはまだバスは走っていません');
+                            break;
                         }
                     }
                 } else if (holiday == false && com_holiday == true) {
@@ -208,10 +229,13 @@
                             if (Number(hourminute) > Number(jikoku_community[i][destination])) {
                                 answer(jikoku_community[i][departure], jikoku_community[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == 0) {
                                 alert('この時間にはまだバスは走っていません');
                                 break;
                             }
+                        } else if (i == 0) {
+                            alert('この時間にはまだバスは走っていません');
+                            break;
                         }
                     }
                 }
@@ -338,5 +362,7 @@ label {
 <label for="destination">到着</label>
 <button onclick="search()">検索</button>
 <button onclick="location.href='index.html'">戻る</button>
+<p id="departure_answer"></p>
+<p id="destination_answer"></p>
 </body>
 </html>

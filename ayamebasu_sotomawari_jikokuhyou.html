@@ -53,14 +53,14 @@
     function answer(departure, destination) {
         // ひき数departureの長さ（値）が3桁なら
         if (departure.length == 3) {
-            alert('出発' + departure.slice(0,1) + '時' + Number(departure.slice(1,3)) + '分');
+            document.getElementById('departure_answer').textContent = '出発' + departure.slice(0,1) + '時' + Number(departure.slice(1,3)) + '分';
         } else if (departure.length == 4) {
-            alert('出発' + departure.slice(0,2) + '時' + Number(departure.slice(2,4)) + '分');
+            document.getElementById('departure_answer').textContent = '出発' + departure.slice(0,2) + '時' + Number(departure.slice(2,4)) + '分';
         }
         if (destination.length == 3) {
-            alert('到着' + destination.slice(0,1) + '時' + Number(destination.slice(1,3)) + '分');
+            document.getElementById('destination_answer').textContent = '到着' + destination.slice(0,1) + '時' + Number(destination.slice(1,3)) + '分';
         } else if (destination.length == 4) {
-            alert('到着' + destination.slice(0,2) + '時' + Number(destination.slice(2,4)) + '分');
+            document.getElementById('destination_answer').textContent = '到着' + destination.slice(0,2) + '時' + Number(destination.slice(2,4)) + '分';
         }
     }
     function search() {
@@ -126,10 +126,13 @@
                                 // 関数answerのひき数departureにjikoku[i][departure]を、ひき数destinationにjikoku[i][destination]をあてはめた命令を実行する
                                 answer(jikoku[i][departure], jikoku[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == jikoku.length - 1) {
                                 alert('この時間にはもうバスは走っていません');
                                 break;
                             }
+                        } else if (i == jikoku.length - 1) {
+                            alert('この時間にはもうバスは走っていません');
+                            break;
                         }
                     }
                 } else if (holiday == true) {
@@ -138,10 +141,13 @@
                             if (Number(hourminute) < Number(jikoku_holiday[i][departure])) {
                                 answer(jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == jikoku_holiday.length - 1) {
                                 alert('この時間にはもうバスは走っていません');
                                 break;
                             }
+                        } else if (i == jikoku_holiday.length - 1) {
+                            alert('この時間にはもうバスは走っていません');
+                            break;
                         }
                     }
                 } else if (holiday == false && com_holiday == true) {
@@ -150,10 +156,13 @@
                             if (Number(hourminute) < Number(jikoku_community[i][departure])) {
                                 answer(jikoku_community[i][departure], jikoku_community[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == jikoku_community.length - 1) {
                                 alert('この時間にはもうバスは走っていません');
                                 break;
                             }
+                        } else if (i == jikoku_community.length - 1) {
+                            alert('この時間にはもうバスは走っていません');
+                            break;
                         }
                     }
                 }
@@ -166,10 +175,13 @@
                             if (Number(hourminute) > Number(jikoku[i][destination])) {
                                 answer(jikoku[i][departure], jikoku[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == 0) {
                                 alert('この時間にはまだバスは走っていません');
                                 break;
                             }
+                        } else if (i == 0) {
+                            alert('この時間にはまだバスは走っていません');
+                            break;
                         }
                     }
                 } else if (holiday == true) {
@@ -178,10 +190,13 @@
                             if (Number(hourminute) > Number(jikoku_holiday[i][destination])) {
                                 answer(jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
                                 break;
-                            } else {
+                            } else if (i == 0) {
                                 alert('この時間にはまだバスは走っていません');
                                 break;
                             }
+                        } else if (i == 0) {
+                            alert('この時間にはまだバスは走っていません');
+                            break;
                         }
                     }
                 } else if (holiday == false && com_holiday == true) {
@@ -189,11 +204,14 @@
                         if (jikoku_community[i][departure] != '－' && jikoku_community[i][destination] != '－') {
                             if (Number(hourminute) > Number(jikoku_community[i][destination])) {
                                 answer(jikoku_community[i][departure],jikoku_community[i][destination]);
-                                break;    
-                            } else {
+                                break;
+                            } else if (i == 0) {
                                 alert('この時間にはまだバスは走っていません');
                                 break;
                             }
+                        } else if (i == 0) {
+                            alert('この時間にはまだバスは走っていません');
+                            break;
                         }
                     }
                 }
@@ -333,5 +351,7 @@ label {
 <!--関数の名前のあとは()を付ける-->
 <button onclick="search()">検索</button>
 <button onclick="location.href='index.html'">戻る</button>
+<p id="departure_answer"></p>
+<p id="destination_answer"></p>
 </body>
 </html>
