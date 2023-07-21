@@ -56,17 +56,25 @@
     var date = now.getDate();
     var hour = now.getHours();
     var minute = now.getMinutes();
-    function answer(departure, destination) {
+    function answer(departure_name, destination_name, departure, destination) {
+        document.getElementById('departure_name').textContent = departure_name;
+        document.getElementById('destination_name').textContent = destination_name;
         if (departure.length == 3) {
-            document.getElementById('departure_answer').textContent = '出発' + departure.slice(0,1) + '時' + Number(departure.slice(1,3)) + '分';
+            document.getElementById('departure_answer').textContent = departure.slice(0,1) + '時' + Number(departure.slice(1,3)) + '分';
         } else if (departure.length == 4) {
-            document.getElementById('departure_answer').textContent = '出発' + departure.slice(0,2) + '時' + Number(departure.slice(2,4)) + '分';
+            document.getElementById('departure_answer').textContent = departure.slice(0,2) + '時' + Number(departure.slice(2,4)) + '分';
         }
         if (destination.length == 3) {
-            document.getElementById('destination_answer').textContent = '到着' + destination.slice(0,1) + '時' + Number(destination.slice(1,3)) + '分';
+            document.getElementById('destination_answer').textContent = destination.slice(0,1) + '時' + Number(destination.slice(1,3)) + '分';
         } else if (destination.length == 4) {
-            document.getElementById('destination_answer').textContent = '到着' + destination.slice(0,2) + '時' + Number(destination.slice(2,4)) + '分';
+            document.getElementById('destination_answer').textContent = destination.slice(0,2) + '時' + Number(destination.slice(2,4)) + '分';
         }
+        var table = document.getElementById('target');
+        var div = document.getElementById('div');
+        var div_2 = document.getElementById('div_2');
+        table.style.display = 'inline';
+        div.style.display = 'none';
+        div_2.style.display = 'block';
     }
     function search() {
         var departure = Number(document.getElementById('departure_stop').value);
@@ -119,7 +127,7 @@
                     for (var i = 0; i < jikoku_community_holiday.length; i++) {
                         if (jikoku_community_holiday[i][departure] != '－' && jikoku_community_holiday[i][destination] != '－') {
                             if (Number(hourminute) < Number(jikoku_community_holiday[i][departure])) {
-                                answer(jikoku_community_holiday[i][departure], jikoku_community_holiday[i][destination]);
+                                answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_community_holiday[i][departure], jikoku_community_holiday[i][destination]);
                                 break;
                             } else if (i == jikoku_community_holiday.length - 1) {
                                 alert('この時間にはもうバスは走っていません');
@@ -134,7 +142,7 @@
                     for (var i = 0; i < jikoku.length; i++) {
                         if (jikoku[i][departure] != '－' && jikoku[i][destination] != '－') {
                             if (Number(hourminute) < Number(jikoku[i][departure])) {
-                                answer(jikoku[i][departure], jikoku[i][destination]);
+                                answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku[i][departure], jikoku[i][destination]);
                                 break;
                             } else if (i == jikoku.length - 1) {
                                 alert('この時間にはもうバスは走っていません');
@@ -149,7 +157,7 @@
                     for (var i = 0; i < jikoku_holiday.length; i++) {
                         if (jikoku_holiday[i][departure] != '－' && jikoku_holiday[i][destination] != '－') {
                             if (Number(hourminute) < Number(jikoku_holiday[i][departure])) {
-                                answer(jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
+                                answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
                                 break;
                             } else if (i == jikoku_holiday.length - 1) {
                                 alert('この時間にはもうバスは走っていません');
@@ -164,7 +172,7 @@
                     for (var i = 0; i < jikoku_community.length; i++) {
                         if (jikoku_community[i][departure] != '－' && jikoku_community[i][destination] != '－') {
                             if (Number(hourminute) < Number(jikoku_community[i][departure])) {
-                                answer(jikoku_community[i][departure], jikoku_community[i][destination]);
+                                answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_community[i][departure], jikoku_community[i][destination]);
                                 break;
                             } else if (i == jikoku_community.length - 1) {
                                 alert('この時間にはもうバスは走っていません');
@@ -182,7 +190,7 @@
                     for (var i = jikoku_community_holiday.length - 1; i >= 0; i--) {
                         if (jikoku_community_holiday[i][departure] != '－' && jikoku_community_holiday[i][destination] != '－') {
                             if (Number(hourminute) > Number(jikoku_community_holiday[i][destination])) {
-                                answer(jikoku_community_holiday[i][departure], jikoku_community_holiday[i][destination]);
+                                answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_community_holiday[i][departure], jikoku_community_holiday[i][destination]);
                                 break;
                             } else if (i == 0) {
                                 alert('この時間にはまだバスは走っていません');
@@ -197,7 +205,7 @@
                     for (var i = jikoku.length - 1; i >= 0; i--) {
                         if (jikoku[i][departure] != '－' && jikoku[i][destination] != '－') {
                             if (Number(hourminute) > Number(jikoku[i][destination])) {
-                                answer(jikoku[i][departure], jikoku[i][destination]);
+                                answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku[i][departure], jikoku[i][destination]);
                                 break;
                             } else if (i == 0) {
                                 alert('この時間にはまだバスは走っていません');
@@ -212,7 +220,7 @@
                     for (var i = jikoku_holiday.length - 1; i >= 0; i--) {
                         if (jikoku_holiday[i][departure] != '－' && jikoku_holiday[i][destination] != '－') {
                             if (Number(hourminute) > Number(jikoku_holiday[i][destination])) {
-                                answer(jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
+                                answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
                                 break;
                             } else if (i == 0) {
                                 alert('この時間にはまだバスは走っていません');
@@ -227,7 +235,7 @@
                     for (var i = jikoku_community.length - 1; i >= 0; i--) {
                         if (jikoku_community[i][departure] != '－' && jikoku_community[i][destination] != '－') {
                             if (Number(hourminute) > Number(jikoku_community[i][destination])) {
-                                answer(jikoku_community[i][departure], jikoku_community[i][destination]);
+                                answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_community[i][departure], jikoku_community[i][destination]);
                                 break;
                             } else if (i == 0) {
                                 alert('この時間にはまだバスは走っていません');
@@ -336,10 +344,32 @@ label {
     position: relative;
     bottom: 1px;
 }
+table {
+    font-size: 18px;
+    margin: 15px auto;
+    border-collapse: collapse;
+    display: none;
+}
+td {
+    text-align: left;
+    border:1px rgb(158, 158, 158) solid;
+    padding: 8px;
+}
+th {
+    text-align: center;
+    border:1px rgb(158, 158, 158) solid;
+    background-color: #39a73b;
+    color: #ffffff;
+    padding: 8px;
+}
+.table {
+    display: none;
+}
 </style>
 </head>
 <body style="text-align: center">
 <h1>あやめバス内回り<br>時刻表</h1>
+<div id="div">
 <p>出発するバス停を選んでください</p>
 <select id="departure_stop">
 </select>
@@ -361,8 +391,28 @@ label {
 <input type="radio" name="発着" value="到着" id="destination">
 <label for="destination">到着</label>
 <button onclick="search()">検索</button>
+</div>
+<table id="target">
+    <tr>
+        <th></th>
+        <th>停留所</th>
+        <th>時刻</th>
+    </tr>
+    <tr>
+        <td>出発</td>
+        <td id="departure_name"></td>
+        <td id="departure_answer"></td>
+    </tr>
+    <tr>
+        <td>到着</td>
+        <td id="destination_name"></td>
+        <td id="destination_answer"></td>
+    </tr>
+</table>
+<div class="table" id="div_2">
+<button onclick="">一本後のバス</button>
+<button onclick="">一本前のバス</button>
+</div>
 <button onclick="location.href='index.html'">戻る</button>
-<p id="departure_answer"></p>
-<p id="destination_answer"></p>
 </body>
 </html>
