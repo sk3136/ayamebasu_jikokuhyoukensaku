@@ -71,6 +71,14 @@
         div.style.display = 'none';
         div_2.style.display = 'block';
     }
+    function onemore() {
+        var table = document.getElementById('target');
+        var div = document.getElementById('div');
+        var div_2 = document.getElementById('div_2');
+        table.style.display = 'none';
+        div.style.display = 'block';
+        div_2.style.display = 'none';
+    }
     function search() {
         var departure = Number(document.getElementById('departure_stop').value);
         var destination = Number(document.getElementById('destination_stop').value);
@@ -401,9 +409,12 @@ th {
     </tr>
 </table>
 <div class="table" id="div_2">
+<!--二度条件を満たしたら-->
 <button onclick="">一本後のバス</button>
+<!--一度条件を満たしたら逆行させる-->
 <button onclick="">一本前のバス</button>
+<button onclick="onemore()">検索画面に戻る</button>
 </div>
-<button onclick="location.href='index.html'">戻る</button>
+<button onclick="location.href='index.html'">外回り・内回り<br>選択画面に戻る</button>
 </body>
 </html>
