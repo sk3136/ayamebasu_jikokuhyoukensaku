@@ -319,6 +319,29 @@
             }
         }
     }
+    function waittime() {
+        var hour_waittime = '';
+        var minute_waittime = '';
+        if (answer_departure_minute <= answer_destination_minute) {
+            hour_waittime = answer_destination_hour - answer_departure_hour;
+            minute_waittime = Number(answer_destination_minute) - Number(answer_departure_minute);
+            if (hour_waittime == 0) {
+                alert(Number(minute_waittime) + '分');
+            } else {
+                alert(Number(hour_waittime) + '時間' + Number(minute_waittime) + '分');
+            }
+        } else if (answer_departure_minute > answer_destination_minute){
+            answer_departure_hour = Number(answer_departure_hour) + 1;
+            answer_departure_minute = 60 - answer_departure_minute;
+            hour_waittime = answer_destination_hour - answer_departure_hour;
+            minute_waittime = Number(answer_departure_minute) + Number(answer_destination_minute);
+            if (hour_waittime == 0) {
+                alert(Number(minute_waittime) + '分');
+            } else {
+                alert(Number(hour_waittime) + '時間' + Number(minute_waittime) + '分');
+            }
+        }
+    }
     // addoptionはセレクトボックスにoptionを加える（add）という意味
     window.onload = function addOption() {
         for (var i = 0; i < soto_bus_stop.length; i++) {
@@ -495,6 +518,7 @@ th {
 <!--answerの答えをsearchの引数に入れてもう一度繰り返す-->
 <button onclick="search('出発', answer_departure_hour, answer_departure_minute)">一本後のバス</button>
 <button onclick="search('到着', answer_destination_hour, answer_destination_minute)">一本前のバス</button>
+<button onclick="waittime()">所要時間</button>
 <button onclick="onemore()">検索画面に戻る</button>
 </div>
 <button onclick="location.href='index.html'">外回り・内回り<br>選択画面に戻る</button>
