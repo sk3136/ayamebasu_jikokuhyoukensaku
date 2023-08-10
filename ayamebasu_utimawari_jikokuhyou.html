@@ -350,9 +350,9 @@
             hour_waittime = answer_destination_hour - answer_departure_hour;
             minute_waittime = Number(answer_destination_minute) - Number(answer_departure_minute);
             if (hour_waittime == 0) {
-                alert(Number(minute_waittime) + '分');
+                alert(Number(minute_waittime) + '分です');
             } else {
-                alert(Number(hour_waittime) + '時間' + Number(minute_waittime) + '分');
+                alert(Number(hour_waittime) + '時間' + Number(minute_waittime) + '分です');
             }
         } else if (answer_departure_minute > answer_destination_minute){
             var answer_departure_hour_1 = Number(answer_departure_hour) + 1;
@@ -360,9 +360,9 @@
             hour_waittime = answer_destination_hour - answer_departure_hour_1;
             minute_waittime = Number(answer_departure_minute_1) + Number(answer_destination_minute);
             if (hour_waittime == 0) {
-                alert(Number(minute_waittime) + '分');
+                alert(Number(minute_waittime) + '分です');
             } else {
-                alert(Number(hour_waittime) + '時間' + Number(minute_waittime) + '分');
+                alert(Number(hour_waittime) + '時間' + Number(minute_waittime) + '分です');
             }
         }
     }
