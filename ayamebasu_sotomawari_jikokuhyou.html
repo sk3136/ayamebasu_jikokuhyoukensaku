@@ -332,10 +332,10 @@
                 alert(Number(hour_waittime) + '時間' + Number(minute_waittime) + '分');
             }
         } else if (answer_departure_minute > answer_destination_minute){
-            answer_departure_hour = Number(answer_departure_hour) + 1;
-            answer_departure_minute = 60 - answer_departure_minute;
-            hour_waittime = answer_destination_hour - answer_departure_hour;
-            minute_waittime = Number(answer_departure_minute) + Number(answer_destination_minute);
+            var answer_departure_hour_1 = Number(answer_departure_hour) + 1;
+            var answer_departure_minute_1 = 60 - answer_departure_minute;
+            hour_waittime = answer_destination_hour - answer_departure_hour_1;
+            minute_waittime = Number(answer_departure_minute_1) + Number(answer_destination_minute);
             if (hour_waittime == 0) {
                 alert(Number(minute_waittime) + '分');
             } else {
