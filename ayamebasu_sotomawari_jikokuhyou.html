@@ -291,7 +291,8 @@
                     }
                 }
             }
-        } else if (year == 2024) {
+        // %は割ったときの余りを調べる　yearを4で割った数のあまりが0かつyearを100で割った数のあまりが0ではない、またはyearを400で割った数のあまりが0なら
+        } else if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
             for (var i = 1; i < 30; i++) {
                     var select = document.getElementById("date");
                     var option = document.createElement("option");
@@ -304,7 +305,7 @@
                     }
                 }
             }
-        } else if (year == 2023) {
+        } else {
             for (var i = 1; i < 29; i++) {
                 var select = document.getElementById("date");
                 var option = document.createElement("option");
@@ -432,6 +433,7 @@ select {
 }
 input {
     margin: 10px;
+    /* radioボタンのボタン部分の大きさを1.75にする*/
     transform: scale(1.75);
 }
 label {
@@ -488,7 +490,7 @@ th {
     <select id="hour"></select>時
     <select id="minute"></select>分
 </p>
-<!--radioボタンを作る　radioボタンのボタン部分の大きさを1.75にする　radioボタンの初期値を設定する　　nameはセットの名前なので一つのときはいらない-->
+<!--radioボタンを作る　radioボタンの初期値に設定する（checked）　nameはセットの名前なので一つのときはいらない-->
 <input type="radio" name="発着" value="出発" id="departure" checked>
 <label for="departure">出発</label><br>
 <input type="radio" name="発着" value="到着" id="destination">

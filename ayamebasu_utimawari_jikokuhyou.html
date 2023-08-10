@@ -315,7 +315,7 @@
                     }
                 }
             }
-        } else if (year == 2024) {
+        } else if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
             for (var i = 1; i < 30; i++) {
                     var select = document.getElementById("date");
                     var option = document.createElement("option");
@@ -328,7 +328,7 @@
                     }
                 }
             }
-        } else if (year == 2023) {
+        } else {
             for (var i = 1; i < 29; i++) {
                 var select = document.getElementById("date");
                 var option = document.createElement("option");
