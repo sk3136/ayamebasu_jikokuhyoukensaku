@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>あやめバス内回り時刻表</title>
+<title>あやめバス内回り時刻表検索アプリ</title>
 <script>
     var uti_bus_stop = ['新発田営業所（新発田高校前）','新発田駅','新発田病院','ボランティアセンター前','カルチャーセンター入口','緑町','生涯学習センター前','カトリック教会前','上町','中町','石川小路','西新発田高校前','新発田城址公園','新発田郵便局前','城北町1丁目','城北町ニュータウン','城北町3丁目','中曽根町1丁目','中曽根町','舟入町','舟入町2丁目','コモタウン','新栄町2丁目','新栄町1丁目','自動車学校前','住吉町','隣保館前','住吉町4丁目','イオンモール','西新発田駅前','住吉町5丁目','御幸町2丁目','御幸町3丁目','大栄町2丁目','豊浦病院前','農業高校前','大栄町','中央町','中央商店街','駅前通','新発田駅','新発田営業所（新発田高校前）'];
     var jikoku = [
@@ -153,13 +153,14 @@
                             if (Number(hourminute) < Number(jikoku_community_holiday[i][departure])) {
                                 answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_community_holiday[i][departure], jikoku_community_holiday[i][destination]);
                                 document.getElementById('answer_time').textContent = year_selected + '年' + month_selected + '月' + date_selected + '日' + '(' + dayOfWeek_japan[dayOfWeek] + ')';
+                                waittime();
                                 break;
                             } else if (i == jikoku_community_holiday.length - 1) {
-                                alert('この時間にはもうバスは走っていません');
+                                alert('指定したバス停と時刻で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == jikoku_community_holiday.length - 1) {
-                            alert('この時間にはもうバスは走っていません');
+                            alert('指定したバス停と時刻で利用できるバスはありません');
                             break;
                         }
                     }
@@ -169,13 +170,14 @@
                             if (Number(hourminute) < Number(jikoku[i][departure])) {
                                 answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku[i][departure], jikoku[i][destination]);
                                 document.getElementById('answer_time').textContent = year_selected + '年' + month_selected + '月' + date_selected + '日' + '(' + dayOfWeek_japan[dayOfWeek] + ')';
+                                waittime();
                                 break;
                             } else if (i == jikoku.length - 1) {
-                                alert('この時間にはもうバスは走っていません');
+                                alert('指定したバス停と時刻で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == jikoku.length - 1) {
-                            alert('この時間にはもうバスは走っていません');
+                            alert('指定したバス停と時刻で利用できるバスはありません');
                             break;
                         }
                     }
@@ -185,13 +187,14 @@
                             if (Number(hourminute) < Number(jikoku_holiday[i][departure])) {
                                 answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
                                 document.getElementById('answer_time').textContent = year_selected + '年' + month_selected + '月' + date_selected + '日' + '(' + dayOfWeek_japan[dayOfWeek] + ')';
+                                waittime();
                                 break;
                             } else if (i == jikoku_holiday.length - 1) {
-                                alert('この時間にはもうバスは走っていません');
+                                alert('指定したバス停と時刻で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == jikoku_holiday.length - 1) {
-                            alert('この時間にはもうバスは走っていません');
+                            alert('指定したバス停と時刻で利用できるバスはありません');
                             break;
                         }
                     }
@@ -201,13 +204,14 @@
                             if (Number(hourminute) < Number(jikoku_community[i][departure])) {
                                 answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_community[i][departure], jikoku_community[i][destination]);
                                 document.getElementById('answer_time').textContent = year_selected + '年' + month_selected + '月' + date_selected + '日' + '(' + dayOfWeek_japan[dayOfWeek] + ')';
+                                waittime();
                                 break;
                             } else if (i == jikoku_community.length - 1) {
-                                alert('この時間にはもうバスは走っていません');
+                                alert('指定したバス停と時刻で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == jikoku_community.length - 1) {
-                            alert('この時間にはもうバスは走っていません');
+                            alert('指定したバス停と時刻で利用できるバスはありません');
                             break;
                         }
                     }
@@ -220,13 +224,14 @@
                             if (Number(hourminute) > Number(jikoku_community_holiday[i][destination])) {
                                 answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_community_holiday[i][departure], jikoku_community_holiday[i][destination]);
                                 document.getElementById('answer_time').textContent = year_selected + '年' + month_selected + '月' + date_selected + '日' + '(' + dayOfWeek_japan[dayOfWeek] + ')';
+                                waittime();
                                 break;
                             } else if (i == 0) {
-                                alert('この時間にはまだバスは走っていません');
+                                alert('指定したバス停と時刻で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == 0) {
-                            alert('この時間にはまだバスは走っていません');
+                            alert('指定したバス停と時刻で利用できるバスはありません');
                             break;
                         }
                     }
@@ -236,13 +241,14 @@
                             if (Number(hourminute) > Number(jikoku[i][destination])) {
                                 answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku[i][departure], jikoku[i][destination]);
                                 document.getElementById('answer_time').textContent = year_selected + '年' + month_selected + '月' + date_selected + '日' + '(' + dayOfWeek_japan[dayOfWeek] + ')';
+                                waittime();
                                 break;
                             } else if (i == 0) {
-                                alert('この時間にはまだバスは走っていません');
+                                alert('指定したバス停と時刻で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == 0) {
-                            alert('この時間にはまだバスは走っていません');
+                            alert('指定したバス停と時刻で利用できるバスはありません');
                             break;
                         }
                     }
@@ -252,13 +258,14 @@
                             if (Number(hourminute) > Number(jikoku_holiday[i][destination])) {
                                 answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_holiday[i][departure], jikoku_holiday[i][destination]);
                                 document.getElementById('answer_time').textContent = year_selected + '年' + month_selected + '月' + date_selected + '日' + '(' + dayOfWeek_japan[dayOfWeek] + ')';
+                                waittime();
                                 break;
                             } else if (i == 0) {
-                                alert('この時間にはまだバスは走っていません');
+                                alert('指定したバス停と時刻で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == 0) {
-                            alert('この時間にはまだバスは走っていません');
+                            alert('指定したバス停と時刻で利用できるバスはありません');
                             break;
                         }
                     }
@@ -268,13 +275,14 @@
                             if (Number(hourminute) > Number(jikoku_community[i][destination])) {
                                 answer(uti_bus_stop[departure], uti_bus_stop[destination], jikoku_community[i][departure], jikoku_community[i][destination]);
                                 document.getElementById('answer_time').textContent = year_selected + '年' + month_selected + '月' + date_selected + '日' + '(' + dayOfWeek_japan[dayOfWeek] + ')';
+                                waittime();
                                 break;
                             } else if (i == 0) {
-                                alert('この時間にはまだバスは走っていません');
+                                alert('指定したバス停と時刻で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == 0) {
-                            alert('この時間にはまだバスは走っていません');
+                            alert('指定したバス停と時刻で利用できるバスはありません');
                             break;
                         }
                     }
@@ -350,9 +358,9 @@
             hour_waittime = answer_destination_hour - answer_departure_hour;
             minute_waittime = Number(answer_destination_minute) - Number(answer_departure_minute);
             if (hour_waittime == 0) {
-                alert(Number(minute_waittime) + '分です');
+                document.getElementById('waittime').textContent = '(' + Number(minute_waittime) + '分)';
             } else {
-                alert(Number(hour_waittime) + '時間' + Number(minute_waittime) + '分です');
+                document.getElementById('waittime').textContent = '(' + Number(hour_waittime) + '時間' + Number(minute_waittime) + '分)';
             }
         } else if (answer_departure_minute > answer_destination_minute){
             var answer_departure_hour_1 = Number(answer_departure_hour) + 1;
@@ -360,9 +368,9 @@
             hour_waittime = answer_destination_hour - answer_departure_hour_1;
             minute_waittime = Number(answer_departure_minute_1) + Number(answer_destination_minute);
             if (hour_waittime == 0) {
-                alert(Number(minute_waittime) + '分です');
+                document.getElementById('waittime').textContent = '(' + Number(minute_waittime) + '分)';
             } else {
-                alert(Number(hour_waittime) + '時間' + Number(minute_waittime) + '分です');
+                document.getElementById('waittime').textContent = '(' + Number(hour_waittime) + '時間' + Number(minute_waittime) + '分)';
             }
         }
     }
@@ -455,13 +463,13 @@ label {
     bottom: 1px;
 }
 table {
-    font-size: 18px;
+    font-size: 22.5px;
     margin: 15px auto;
     border-collapse: collapse;
     display: none;
 }
 td {
-    text-align: left;
+    text-align: center;
     border:1px rgb(158, 158, 158) solid;
     padding: 8px;
 }
@@ -476,12 +484,12 @@ th {
     display: none;
 }
 .time {
-    width: 190px;
+    width: 200px;
 }
 </style>
 </head>
 <body style="text-align: center">
-<h1>あやめバス内回り<br>時刻表</h1>
+<h1>あやめバス内回り<br>時刻表検索アプリ</h1>
 <div id="div">
 <p>出発するバス停を選んでください</p>
 <select id="departure_stop">
@@ -509,24 +517,24 @@ th {
 <p><a id="answer_time"></a>の検索結果</p>
 <table id="target">
     <tr>
-        <th></th>
         <th class="time">停留所</th>
         <th>時刻</th>
     </tr>
     <tr>
-        <td>出発</td>
         <td class="time" id="departure_name"></td>
         <td id="departure_answer"></td>
     </tr>
     <tr>
-        <td>到着</td>
+        <td class="time">↓</td>
+        <td id="waittime"></td>
+    </tr>
+    <tr>
         <td class="time" id="destination_name"></td>
         <td id="destination_answer"></td>
     </tr>
 </table>
 <button onclick="search('出発', answer_departure_hour, answer_departure_minute)">一本後のバス</button>
 <button onclick="search('到着', answer_destination_hour, answer_destination_minute)">一本前のバス</button>
-<button onclick="waittime()">所要時間</button>
 <button onclick="onemore()">検索画面に戻る</button>
 </div>
 <button onclick="location.href='index.html'">外回り・内回り<br>選択画面に戻る</button>
