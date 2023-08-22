@@ -331,7 +331,7 @@
                     }
                 }
                 if (onload == 0) {
-                    if (date_selected < 31) {
+                    if (date < 31) {
                         if (option.value == date) {
                             option.setAttribute("selected", true);
                         }
@@ -342,6 +342,7 @@
                     }
                 }
             }
+        // %は割ったときの余りを調べる　yearを4で割った数のあまりが0かつyearを100で割った数のあまりが0ではない、またはyearを400で割った数のあまりが0なら
         } else if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
             for (var i = 1; i < 30; i++) {
                     var select = document.getElementById("date");
@@ -355,7 +356,7 @@
                     }
                 }
                 if (onload == 0) {
-                    if (date_selected < 30) {
+                    if (date < 30) {
                         if (option.value == date) {
                             option.setAttribute("selected", true);
                         }
@@ -379,7 +380,7 @@
                     }
                 }
                 if (onload == 0) {
-                    if (date_selected < 29) {
+                    if (date < 29) {
                         if (option.value == date) {
                             option.setAttribute("selected", true);
                         }
