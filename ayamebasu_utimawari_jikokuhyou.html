@@ -294,6 +294,9 @@
         var sel = document.getElementById("date");
         var year = document.getElementById('year').value;
         var month = document.getElementById('month').value;
+        if (onload == 0) {
+            date = document.getElementById('date').value;
+        }
         for (var i = 1; i < 32; i++) {
             sel.remove(0);
         }
@@ -305,6 +308,11 @@
                 option.value = i;
                 select.appendChild(option);
                 if (onload == 1) {
+                    if (option.value == date) {
+                        option.setAttribute("selected", true);
+                    }
+                }
+                if (onload == 0) {
                     if (option.value == date) {
                         option.setAttribute("selected", true);
                     }
@@ -322,6 +330,17 @@
                         option.setAttribute("selected", true);
                     }
                 }
+                if (onload == 0) {
+                    if (date_selected < 31) {
+                        if (option.value == date) {
+                            option.setAttribute("selected", true);
+                        }
+                    } else {
+                        if (option.value == 30) {
+                            option.setAttribute("selected", true);
+                        }
+                    }
+                }
             }
         } else if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
             for (var i = 1; i < 30; i++) {
@@ -335,6 +354,17 @@
                         option.setAttribute("selected", true);
                     }
                 }
+                if (onload == 0) {
+                    if (date_selected < 30) {
+                        if (option.value == date) {
+                            option.setAttribute("selected", true);
+                        }
+                    } else {
+                        if (option.value == 29) {
+                            option.setAttribute("selected", true);
+                        }
+                    }
+                }
             }
         } else {
             for (var i = 1; i < 29; i++) {
@@ -346,6 +376,17 @@
                 if (onload == 1) {
                     if (option.value == date) {
                         option.setAttribute("selected", true);
+                    }
+                }
+                if (onload == 0) {
+                    if (date_selected < 29) {
+                        if (option.value == date) {
+                            option.setAttribute("selected", true);
+                        }
+                    } else {
+                        if (option.value == 28) {
+                            option.setAttribute("selected", true);
+                        }
                     }
                 }
             }
