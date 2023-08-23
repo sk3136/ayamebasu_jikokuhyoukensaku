@@ -375,8 +375,10 @@
             minute_waittime = Number(answer_destination_minute) - Number(answer_departure_minute);
             if (hour_waittime == 0) {
                 document.getElementById('waittime').textContent = '(' + Number(minute_waittime) + '分)';
-            } else {
+            } else if (minute_waittime != 0) {
                 document.getElementById('waittime').textContent = '(' + Number(hour_waittime) + '時間' + Number(minute_waittime) + '分)';
+            } else {
+                document.getElementById('waittime').textContent = '(' + Number(hour_waittime) + '時間)';
             }
         } else if (answer_departure_minute > answer_destination_minute){
             var answer_departure_hour_1 = Number(answer_departure_hour) + 1;

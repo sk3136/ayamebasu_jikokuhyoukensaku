@@ -342,7 +342,6 @@
                     }
                 }
             }
-        // %は割ったときの余りを調べる　yearを4で割った数のあまりが0かつyearを100で割った数のあまりが0ではない、またはyearを400で割った数のあまりが0なら
         } else if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
             for (var i = 1; i < 30; i++) {
                     var select = document.getElementById("date");
@@ -401,8 +400,10 @@
             minute_waittime = Number(answer_destination_minute) - Number(answer_departure_minute);
             if (hour_waittime == 0) {
                 document.getElementById('waittime').textContent = '(' + Number(minute_waittime) + '分)';
-            } else {
+            } else if (minute_waittime != 0) {
                 document.getElementById('waittime').textContent = '(' + Number(hour_waittime) + '時間' + Number(minute_waittime) + '分)';
+            } else {
+                document.getElementById('waittime').textContent = '(' + Number(hour_waittime) + '時間)';
             }
         } else if (answer_departure_minute > answer_destination_minute){
             var answer_departure_hour_1 = Number(answer_departure_hour) + 1;
