@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>あやめバス内回り時刻表検索アプリ</title>
 <script>
-    var uti_bus_stop = ['新発田営業所（新発田高校前）','新発田駅','新発田病院','ボランティアセンター前','カルチャーセンター入口','緑町','生涯学習センター前','カトリック教会前','上町','中町','石川小路','西新発田高校前','新発田城址公園','新発田郵便局前','城北町1丁目','城北町ニュータウン','城北町3丁目','中曽根町1丁目','中曽根町','舟入町','舟入町2丁目','コモタウン','新栄町2丁目','新栄町1丁目','自動車学校前','住吉町','隣保館前','住吉町4丁目','イオンモール','西新発田駅前','住吉町5丁目','御幸町2丁目','御幸町3丁目','大栄町2丁目','豊浦病院前','農業高校前','大栄町','中央町','中央商店街','駅前通','新発田駅','新発田営業所（新発田高校前）'];
+    var uti_bus_stop = ['新発田営業所（新発田高校前）','新発田駅','新発田病院','ボランティアセンター前','カルチャーセンター入口','緑町','生涯学習センター前','カトリック教会前','新発田市役所前','中町','石川小路','西新発田高校前','新発田城址公園','新発田郵便局前','城北町1丁目','城北町ニュータウン','城北町3丁目','中曽根町1丁目','中曽根町','舟入町','舟入町2丁目','コモタウン','新栄町2丁目','新栄町1丁目','自動車学校前','住吉町','隣保館前','住吉町4丁目','イオンモール','西新発田駅前','住吉町5丁目','御幸町2丁目','御幸町3丁目','大栄町2丁目','リハビリテーション病院前','農業高校前','大栄町','中央町','中央商店街','駅前通','新発田駅','新発田営業所（新発田高校前）'];
     var jikoku = [
         ['－','－','－','－','－','－','－','－','－','－','－','－','－','－','－','710','711','712','713','714','715','718','719','720','722','724','725','726','728','734','736','738','740','741','－','－','743','745','746','747','748','754'],
         ['808','815','816','818','819','821','824','825','827','828','829','832','833','834','835','836','837','838','839','840','842','845','846','847','849','851','852','853','855','901','903','905','907','908','－','－','910','912','913','914','915','921'],
@@ -156,11 +156,11 @@
                                 waittime();
                                 break;
                             } else if (i == jikoku_community_holiday.length - 1) {
-                                alert('指定したバス停と時刻で利用できるバスはありません');
+                                alert('指定したバス停と日時で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == jikoku_community_holiday.length - 1) {
-                            alert('指定したバス停と時刻で利用できるバスはありません');
+                            alert('指定したバス停と日時で利用できるバスはありません');
                             break;
                         }
                     }
@@ -173,11 +173,11 @@
                                 waittime();
                                 break;
                             } else if (i == jikoku.length - 1) {
-                                alert('指定したバス停と時刻で利用できるバスはありません');
+                                alert('指定したバス停と日時で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == jikoku.length - 1) {
-                            alert('指定したバス停と時刻で利用できるバスはありません');
+                            alert('指定したバス停と日時で利用できるバスはありません');
                             break;
                         }
                     }
@@ -190,11 +190,11 @@
                                 waittime();
                                 break;
                             } else if (i == jikoku_holiday.length - 1) {
-                                alert('指定したバス停と時刻で利用できるバスはありません');
+                                alert('指定したバス停と日時で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == jikoku_holiday.length - 1) {
-                            alert('指定したバス停と時刻で利用できるバスはありません');
+                            alert('指定したバス停と日時で利用できるバスはありません');
                             break;
                         }
                     }
@@ -207,11 +207,11 @@
                                 waittime();
                                 break;
                             } else if (i == jikoku_community.length - 1) {
-                                alert('指定したバス停と時刻で利用できるバスはありません');
+                                alert('指定したバス停と日時で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == jikoku_community.length - 1) {
-                            alert('指定したバス停と時刻で利用できるバスはありません');
+                            alert('指定したバス停と日時で利用できるバスはありません');
                             break;
                         }
                     }
@@ -227,11 +227,11 @@
                                 waittime();
                                 break;
                             } else if (i == 0) {
-                                alert('指定したバス停と時刻で利用できるバスはありません');
+                                alert('指定したバス停と日時で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == 0) {
-                            alert('指定したバス停と時刻で利用できるバスはありません');
+                            alert('指定したバス停と日時で利用できるバスはありません');
                             break;
                         }
                     }
@@ -244,11 +244,11 @@
                                 waittime();
                                 break;
                             } else if (i == 0) {
-                                alert('指定したバス停と時刻で利用できるバスはありません');
+                                alert('指定したバス停と日時で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == 0) {
-                            alert('指定したバス停と時刻で利用できるバスはありません');
+                            alert('指定したバス停と日時で利用できるバスはありません');
                             break;
                         }
                     }
@@ -261,11 +261,11 @@
                                 waittime();
                                 break;
                             } else if (i == 0) {
-                                alert('指定したバス停と時刻で利用できるバスはありません');
+                                alert('指定したバス停と日時で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == 0) {
-                            alert('指定したバス停と時刻で利用できるバスはありません');
+                            alert('指定したバス停と日時で利用できるバスはありません');
                             break;
                         }
                     }
@@ -278,11 +278,11 @@
                                 waittime();
                                 break;
                             } else if (i == 0) {
-                                alert('指定したバス停と時刻で利用できるバスはありません');
+                                alert('指定したバス停と日時で利用できるバスはありません');
                                 break;
                             }
                         } else if (i == 0) {
-                            alert('指定したバス停と時刻で利用できるバスはありません');
+                            alert('指定したバス停と日時で利用できるバスはありません');
                             break;
                         }
                     }
@@ -478,23 +478,27 @@
 <style>
 body {
     font-family: sans-serif;
+    margin: 0px;
 }
 h1 {
     background-color: #673b5d;
     color: #ffffff;
-    padding: 8px;
-    padding-top: 14px;
+    font-size: 25px;
+    padding: 4px;
+    padding-top: 7px;
+    margin: 0px;
 }
 button {
     margin: 15px auto;
     display: block;
-    font-size: 22.5px;
+    font-size: 20px;
 }
 p {
-    font-size: 22.5px;
+    font-size: 20px;
+    margin: 20px auto;
 }
 select {
-    font-size: 22.5px;
+    font-size: 20px;
 }
 input {
     margin: 10px;
@@ -506,7 +510,7 @@ label {
     bottom: 1px;
 }
 table {
-    font-size: 22.5px;
+    font-size: 20px;
     margin: 15px auto;
     border-collapse: collapse;
     display: none;
@@ -540,7 +544,7 @@ th {
 <p>目的地のバス停を選んでください</p>
 <select id="destination_stop">
 </select>
-<p>利用時間を選んでください</p>
+<p>利用日時を選んでください</p>
 <p>
     <select onchange="month_change(0)" id="year"></select>年
     <select onchange="month_change(0)" id="month"></select>月
@@ -550,10 +554,8 @@ th {
     <select id="hour"></select>時
     <select id="minute"></select>分
 </p>
-<input type="radio" name="発着" value="出発" id="departure" checked>
-<label for="departure">出発</label><br>
-<input type="radio" name="発着" value="到着" id="destination">
-<label for="destination">到着</label>
+<label><input type="radio" name="発着" value="出発" checked>出発</label>
+<label><input type="radio" name="発着" value="到着">到着</label>
 <button onclick="get_selectedtime()">検索</button>
 </div>
 <div class="table" id="div_2">
