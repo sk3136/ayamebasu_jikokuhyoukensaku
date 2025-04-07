@@ -55,7 +55,9 @@
     var date = now.getDate();
     var hour = now.getHours();
     var minute = now.getMinutes();
-    var syukujitu = ['2025/1/1', '2025/1/2', '2025/1/13', '2025/2/11', '2025/2/23', '2025/2/24', '2025/3/20', '2025/4/29', '2025/5/3', '2025/5/4', '2025/5/5', '2025/5/6', '2025/7/21', '2025/8/11', '2025/9/15', '2025/9/23', '2025/10/13', '2025/11/3', '2025/11/23', '2025/11/24', '2025/12/31', '2026/1/1', '2026/1/2', '2026/1/12', '2026/2/11', '2026/2/23', '2026/3/20', '2026/4/29', '2026/5/3', '2026/5/4', '2026/5/5', '2026/5/6', '2026/7/20', '2026/8/11', '2026/9/21', '2026/9/22', '2026/9/23', '2026/10/12', '2026/11/3', '2026/11/23', '2026/12/31'];
+    var syukujitu = [year + '/1/1', year + '/1/2', year + '/2/11', year + '/4/29', year + '/5/3', year + '/5/4', year + '/5/5', year + '/8/11', year + '/11/3', year + '/11/23', year + '/12/31', Number(year + 1) + '/1/1', Number(year + 1) + '/1/2', Number(year + 1) + '/2/11', Number(year + 1) + '/4/29', Number(year + 1) + '/5/3', Number(year + 1) + '/5/4', Number(year + 1) + '/5/5', Number(year + 1) + '/8/11', Number(year + 1) + '/11/3', Number(year + 1) + '/11/23', Number(year + 1) + '/12/31'];
+    // 天皇誕生日 春分・秋分の日　法律で増える国民の休日
+    var undef_holiday = ['2025/2/23', '2025/2/24', '2025/3/20', '2025/5/6', '2025/9/23', '2025/11/24', '2026/2/23', '2026/3/20', '2026/5/6', '2026/9/22', '2026/9/23'];
     var community = ['1/1','1/2','1/3','8/13','8/14','8/15','8/16','12/29','12/30','12/31'];
     function get_selectedtime() {
         var hour_selected = document.getElementById('hour').value;
@@ -69,6 +71,34 @@
             }
         }
         search(checkValue, hour_selected, minute_selected);
+    }
+    function add_holiday() {
+        for (var i = 0; i < undef_holiday.length; i++) {
+            syukujitu.push(undef_holiday[i]);
+        }
+        var month_candidate = [1, 7, 9, 10];
+        for (var i = 0; i < 2; i++) {
+            for (var j = 0; j < 4; j++) {
+                var monday_count = 0;
+                for (var k = 1; k < 22; k++) {
+                    var new_dayOfWeek = new Date(year + i, month_candidate[j] - 1, k).getDay();
+                    if (new_dayOfWeek == 1) {
+                        monday_count++;
+                    }
+                    if (monday_count == 2) {
+                        if (month_candidate[j] == 1 || month_candidate[j] == 10) {
+                            syukujitu.push(Number(year + i) + '/' + month_candidate[j] + '/' + k);
+                            break;
+                        }
+                    } else if (monday_count == 3) {
+                        if (month_candidate[j] == 7 || month_candidate[j] == 9) {
+                            syukujitu.push(Number(year + i) + '/' + month_candidate[j] + '/' + k);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
     var answer_departure_hour = '';
     var answer_departure_minute = '';
@@ -474,6 +504,7 @@
                 option.setAttribute("selected", true);
             }
         }
+        add_holiday();
     }
 </script>
 <style>
