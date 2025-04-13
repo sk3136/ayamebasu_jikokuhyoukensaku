@@ -49,9 +49,9 @@
     var date = now.getDate();
     var hour = now.getHours();
     var minute = now.getMinutes();
-    var syukujitu = [year + '/1/1', year + '/1/2', year + '/2/11', year + '/4/29', year + '/5/3', year + '/5/4', year + '/5/5', year + '/8/11', year + '/11/3', year + '/11/23', year + '/12/31', Number(year + 1) + '/1/1', Number(year + 1) + '/1/2', Number(year + 1) + '/2/11', Number(year + 1) + '/4/29', Number(year + 1) + '/5/3', Number(year + 1) + '/5/4', Number(year + 1) + '/5/5', Number(year + 1) + '/8/11', Number(year + 1) + '/11/3', Number(year + 1) + '/11/23', Number(year + 1) + '/12/31'];
-    // 天皇誕生日 春分・秋分の日　法律で増える国民の休日
-    var undef_holiday = ['2025/2/23', '2025/2/24', '2025/3/20', '2025/5/6', '2025/9/23', '2025/11/24', '2026/2/23', '2026/3/20', '2026/5/6', '2026/9/22', '2026/9/23'];
+    var syukujitu = [year + '|1/1', year + '|1/2', year + '|2/11', year + '|4/29', year + '|5/3', year + '|5/4', year + '|5/5', year + '|8/11', year + '|11/3', year + '|11/23', year + '|12/31', Number(year + 1) + '|1/1', Number(year + 1) + '|1/2', Number(year + 1) + '|2/11', Number(year + 1) + '|4/29', Number(year + 1) + '|5/3', Number(year + 1) + '|5/4', Number(year + 1) + '|5/5', Number(year + 1) + '|8/11', Number(year + 1) + '|11/3', Number(year + 1) + '|11/23', Number(year + 1) + '|12/31'];
+    // 天皇誕生日 春分・秋分の日
+    var undef_holiday = ['2025|2/23', '2025|3/20', '2025|9/23', '2026|2/23', '2026|3/20', '2026|9/23'];
     var community = ['1/1','1/2','1/3','8/13','8/14','8/15','8/16','12/29','12/30','12/31'];
     function get_selectedtime() {
         var hour_selected = document.getElementById('hour').value;
@@ -73,9 +73,11 @@
         search(checkValue, hour_selected, minute_selected);
     }
     function add_holiday() {
+        // 毎年変わる可能性のある休日
         for (var i = 0; i < undef_holiday.length; i++) {
             syukujitu.push(undef_holiday[i]);
         }
+        // 第◯月曜日に関する休日
         var month_candidate = [1, 7, 9, 10];
         for (var i = 0; i < 2; i++) {
             for (var j = 0; j < 4; j++) {
@@ -87,16 +89,59 @@
                     }
                     if (monday_count == 2) {
                         if (month_candidate[j] == 1 || month_candidate[j] == 10) {
-                            syukujitu.push(Number(year + i) + '/' + month_candidate[j] + '/' + k);
+                            syukujitu.push(Number(year + i) + '|' + month_candidate[j] + '/' + k);
                             break;
                         }
                     } else if (monday_count == 3) {
                         if (month_candidate[j] == 7 || month_candidate[j] == 9) {
-                            syukujitu.push(Number(year + i) + '/' + month_candidate[j] + '/' + k);
+                            syukujitu.push(Number(year + i) + '|' + month_candidate[j] + '/' + k);
                             break;
                         }
                     }
                 }
+            }
+        }
+        var slice_year = 0;
+        var slice_month = 0;
+        var slice_date = 0;
+        // 祝日法第3条第2項に関する休日
+        for (var s = 0; s < syukujitu.length; s++) {
+            if (syukujitu[s].slice(syukujitu[s].indexOf('|') + 1, syukujitu[s].length) == '12/31' || syukujitu[s].slice(syukujitu[s].indexOf('|') + 1, syukujitu[s].length) == '1/2') {
+                continue;
+            }
+            slice_year = Number(syukujitu[s].slice(0, syukujitu[s].indexOf('|')));
+            slice_month = Number(syukujitu[s].slice(syukujitu[s].indexOf('|') + 1, syukujitu[s].indexOf('/')));
+            slice_date = Number(syukujitu[s].slice(syukujitu[s].indexOf('/') + 1, syukujitu[s].length));
+            var search_sunday = new Date(slice_year, slice_month - 1, slice_date).getDay();
+            if (search_sunday == 0) {
+                var plus_date = 1;
+                var search = 'on';
+                while (search == 'on') {
+                    var search_sunday_tomorrow = new Date(slice_year, slice_month - 1, slice_date + plus_date);
+                    var sunday_substitute = search_sunday_tomorrow.getFullYear() + '|' + Number(search_sunday_tomorrow.getMonth() + 1) + '/' + search_sunday_tomorrow.getDate();
+                    if (syukujitu.includes(sunday_substitute)) {
+                        plus_date++;
+                    } else {
+                        syukujitu.push(sunday_substitute);
+                        search = 'off';
+                    }
+                }
+            }
+        }
+        // 祝日法第3条第3項に関する休日
+        for (var s = 0; s < syukujitu.length; s++) {
+            if (syukujitu[s].slice(syukujitu[s].indexOf('|') + 1, syukujitu[s].length) == '12/31' || syukujitu[s].slice(syukujitu[s].indexOf('|') + 1, syukujitu[s].length) == '1/2') {
+                continue;
+            }
+            slice_year = Number(syukujitu[s].slice(0, syukujitu[s].indexOf('|')));
+            slice_month = Number(syukujitu[s].slice(syukujitu[s].indexOf('|') + 1, syukujitu[s].indexOf('/')));
+            slice_date = Number(syukujitu[s].slice(syukujitu[s].indexOf('/') + 1, syukujitu[s].length));
+            var tomorrow = new Date(slice_year, slice_month - 1, slice_date + 1);
+            var tomorrow_date = tomorrow.getFullYear() + '|' + Number(tomorrow.getMonth() + 1) + '/' + tomorrow.getDate();
+            var after_tomorrow = new Date(slice_year, slice_month - 1, slice_date + 2);
+            var after_tomorrow_date = after_tomorrow.getFullYear() + '|' + Number(after_tomorrow.getMonth() + 1) + '/' + after_tomorrow.getDate();
+            if (syukujitu.includes(after_tomorrow_date) == true && syukujitu.includes(tomorrow_date) == false) {
+                syukujitu.push(tomorrow_date);
             }
         }
     }
@@ -165,7 +210,7 @@
             holiday = true;
         }
         for (var i = 0; i < syukujitu.length; i++) {
-            if (syukujitu[i] == year_selected + '/' + month_selected + '/' + date_selected) {
+            if (syukujitu[i] == year_selected + '|' + month_selected + '/' + date_selected) {
                 holiday = true;
                 break;
             }
